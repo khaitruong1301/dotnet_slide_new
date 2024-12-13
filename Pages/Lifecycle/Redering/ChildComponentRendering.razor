@@ -1,0 +1,26 @@
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+
+<div>
+    <h5>Dynamic Notification List</h5>
+    <Virtualize Items="@Notifications" Context="notification">
+        @{
+            Console.WriteLine("render list");
+        }
+        <div class="list-group-item d-flex justify-content-between align-items-center my-2 border border-1 p-2">
+            @notification
+            <button class="btn btn-sm btn-danger">Dismiss</button>
+        </div>
+    </Virtualize>
+</div>
+
+
+<p class="text-muted">No notifications available.</p>
+
+
+@code {
+    [Parameter]
+    public List<string>? Notifications { get; set; }
+
+}
+

@@ -1,0 +1,35 @@
+@page "/TableDetail"
+<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        @productDetail.Id
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        name
+                    </th>
+                    <th>
+                        @productDetail.Name
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        @productDetail.Price
+                    </th>
+                </tr>
+            </thead>
+        </table>
+
+
+@code {
+    [Parameter]
+    public ProductCardModel productDetail {get;set;}
+}
