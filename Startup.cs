@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using blazor_soan_slide.Data;
+using blazor_soan_slide.Store.Hub;
 // using blazor_soan_slide.Store.Hub;
 
 namespace blazor_soan_slide
@@ -42,12 +43,12 @@ namespace blazor_soan_slide
             });
 
             // Cấu hình SignalR
-            // services.AddSignalR(options =>
-            // {
-            //     options.MaximumReceiveMessageSize = 102400000; // Cho phép kích thước tin nhắn lớn
-            //     options.KeepAliveInterval = TimeSpan.FromSeconds(15); // Server gửi tín hiệu "keep-alive" mỗi 15 giây
-            //     options.ClientTimeoutInterval = TimeSpan.FromSeconds(30); // Thời gian chờ của client trước khi báo timeout
-            // });
+            services.AddSignalR(options =>
+            {
+                options.MaximumReceiveMessageSize = 102400000; // Cho phép kích thước tin nhắn lớn
+                options.KeepAliveInterval = TimeSpan.FromSeconds(15); // Server gửi tín hiệu "keep-alive" mỗi 15 giây
+                options.ClientTimeoutInterval = TimeSpan.FromSeconds(30); // Thời gian chờ của client trước khi báo timeout
+            });
 
         }
 
@@ -77,6 +78,9 @@ namespace blazor_soan_slide
                     options.ApplicationMaxBufferSize = 10 * 1024 * 1024;
                     options.TransportMaxBufferSize = 10 * 1024 * 1024;
                 });
+                endpoints.MapHub<RoomHub>("/room-hub"); // Map SignalR Hub
+                endpoints.MapHub<ProductHub>("/product-hub"); // Map SignalR Hub
+
                 endpoints.MapFallbackToPage("/_Host");
             });
 
